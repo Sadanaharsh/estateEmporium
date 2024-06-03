@@ -8,6 +8,8 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 dotenv.config();
 
+
+// install the dot env package
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
@@ -17,7 +19,7 @@ mongoose
     console.log(err);
   });
 
-  const __dirname = path.resolve();
+const __dirname = path.resolve();
 
 const app = express();
 
@@ -40,6 +42,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 })
 
+
+// implementation of middleware...
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
